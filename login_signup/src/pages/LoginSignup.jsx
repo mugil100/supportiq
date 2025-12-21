@@ -1,0 +1,173 @@
+import React,{useState} from "react";
+import "../styles/LoginSignUp.css";
+import axios from "axios";
+
+import Header from "../components/Header";
+import Input from "../components/Input"; 
+import Submit from "../components/Submit";
+import TabSelect from "../components/TabSelect";
+
+import usericon from "../assets/person.png";
+import emailicon from "../assets/email.png";
+import pwdicon from "../assets/password.png";
+
+const addr = "http://localhost:5000/";
+
+function LoginSignUp(){
+    const [action,setAction] = useState("Sign Up");
+    const [showpwd, setshowPwd] = useState(false);
+    const [formData, setFormData] = useState(
+        {username:"",
+        identifier:"",
+        email:"",
+        password:""}
+    );
+    console.log("Website is running");
+    const handleChange = (e)=>{
+        setFormData({...formData,[e.target.name]:e.target.value});
+    }
+
+    const validateForm=()=>{
+        if(action==="Sign Up"){
+            // if(!formData.username &&!formData.email &&!formData.password){
+            //     return "All fields are required for Sign Up";
+            // }
+            if (!formData.username.trim())
+                return "Username required";
+            if (!formData.email.trim())
+                return "Email required";
+
+            const emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if(!emailregex.test(formData.email))
+                return"Invalid email format";
+
+            if(formData.password.length<6)
+                return "Password must be atleast 6 characters";
+        }
+        if(action ==="Login"){
+            if(!formData.identifier.trim())
+                return "Enter Email or Username";
+            if(!formData.password.trim())
+                return "Password is required";}
+        // }else{
+        //     if(!formData.username ||!formData.password){
+        //         return"Email and Password are required for Login"
+        //     }
+        // }
+        return null;
+    }
+    // const handleSubmit=()=>{
+    //     const error = validateForm();
+    //     if (error){
+    //         alert(error);
+    //         return;
+    //     }
+
+    //     if(action ==="Login"){
+    //         console.log("Logging in with:", formData);
+    //     }else{
+    //         console.log("Signing up in with:", formData);
+    //     }
+    //     setFormData({username:"", email:"",password:""});
+    // };
+    const handleSubmit = async()=>{
+        const error = validateForm();
+        if (error){
+            alert(error);
+            return;
+        }
+        try{
+            if (action==="Login"){
+
+                const field = formData.identifier.includes("@")?"email":"username";
+
+                const response = await axios.post(addr+"login",{
+                    [field]: formData.identifier,
+                    password: formData.password
+                });
+
+                alert("Login successful");
+                console.log(response.data);
+            }else{
+                const response = await axios.post(addr+"signup",{
+                    username: formData.username,
+                    email: formData.email,
+                    password: formData.password
+                });
+
+                alert("Signup success");
+                console.log(response.data);
+            }
+        }catch(err){
+            alert(err.response?.data?.error); //wot???
+        }
+
+        setFormData({username:"",identifier:"",email:"",password:""});
+    };
+// user
+    return(
+        <div className="container">
+            <TabSelect action={action} setAction={setAction} />
+            <Header action={action}/>
+
+            <div className={`inputs ${action === "Sign Up" ? "signup" : "login"}`}>
+                {action==="Sign Up" &&(
+                    <Input
+                    icon={usericon}
+                    type="text"
+                    placeholder="Username"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    />
+                )}
+                {action==="Sign Up" &&(
+                    <Input
+                    icon={emailicon}
+                    type="email"
+                    placeholder="Email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    />
+                )}
+
+                {action==="Login" &&(
+                    <Input
+                    icon={usericon}
+                    type="text"
+                    placeholder="Email or Username"
+                    name="identifier"
+                    value={formData.identifier}
+                    onChange={handleChange}
+                    />
+                )}
+
+               <div className="password-wrapper">
+                <Input
+                    icon={pwdicon}
+                    type={showpwd?"text":"password"}
+                    placeholder="Password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    />
+                    <span className="toggle" 
+                    onClick={()=>{
+                        setshowPwd(!showpwd)}}>
+                        {showpwd?"🤐":"👀"}
+                        </span>
+               </div>   
+            </div>
+            <div className="forgot-password">
+                Forgot password  <span>Click Here</span>
+            </div>
+            <Submit action={action} handleSubmit={handleSubmit} />
+        </div>
+    );
+}
+
+export default LoginSignUp;
+
+
+
