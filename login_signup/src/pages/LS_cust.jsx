@@ -13,25 +13,31 @@ import pwdicon from "../assets/password.png";
 
 const addr = "http://localhost:5000/";
 
-function LoginSignUp(){
+function LS_cust(){
     const [action,setAction] = useState("Sign Up");
     const [showpwd, setshowPwd] = useState(false);
     const [formData, setFormData] = useState(
-        {username:"",
+        {name:"",
+        username:"",
         identifier:"",
         email:"",
-        password:""}
+        password:"",
+        role:"customer"}
     );
     console.log("Website is running");
     const handleChange = (e)=>{
         setFormData({...formData,[e.target.name]:e.target.value});
     }
 
+    //checks the correctness of inputs
+    //username format to be checked
     const validateForm=()=>{
         if(action==="Sign Up"){
             // if(!formData.username &&!formData.email &&!formData.password){
             //     return "All fields are required for Sign Up";
             // }
+            if (!formData.name.trim())
+                return "Per ah podra";
             if (!formData.username.trim())
                 return "Username required";
             if (!formData.email.trim())
@@ -83,16 +89,19 @@ function LoginSignUp(){
 
                 const response = await axios.post(addr+"login",{
                     [field]: formData.identifier,
-                    password: formData.password
+                    password: formData.password,
+                    role: "customer"
                 });
 
                 alert("Login successful");
                 console.log(response.data);
             }else{
                 const response = await axios.post(addr+"signup",{
+                    name:formData.name,
                     username: formData.username,
                     email: formData.email,
-                    password: formData.password
+                    password: formData.password,
+                    role:"customer"
                 });
 
                 alert("Signup success");
@@ -102,7 +111,7 @@ function LoginSignUp(){
             alert(err.response?.data?.error); //wot???
         }
 
-        setFormData({username:"",identifier:"",email:"",password:""});
+        setFormData({name:"",username:"",identifier:"",email:"",password:""});
     };
 // user
     return(
@@ -111,6 +120,16 @@ function LoginSignUp(){
             <Header action={action}/>
 
             <div className={`inputs ${action === "Sign Up" ? "signup" : "login"}`}>
+                {action==="Sign Up" &&(
+                    <Input
+                    icon={usericon}
+                    type="text"
+                    placeholder="Name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    />
+                )}
                 {action==="Sign Up" &&(
                     <Input
                     icon={usericon}
@@ -167,7 +186,7 @@ function LoginSignUp(){
     );
 }
 
-export default LoginSignUp;
+export default LS_cust;
 
 
 

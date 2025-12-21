@@ -20,7 +20,7 @@ app.get("/",(req,res)=>{
 
 app.post("/signup", async(req,res)=>{
     console.log(req.body);
-    const {username, email,password}=req.body;
+    const {name,username, email,password,role}=req.body;
 
     try{
         const userNameexists = await pool.query(
@@ -40,31 +40,32 @@ app.post("/signup", async(req,res)=>{
     const hashPwd = await bcrypt.hash(password,10);
 
     await pool.query(
-        "insert into users (username,email,password) values ($1,$2,$3)",[username, email, hashPwd]
+        "insert into users (username,email,password,role,name) values ($1,$2,$3,$4,$5)",[username, email, hashPwd,role,name]
     );
 
     res.json({message: "User registered successfully !!!"});
 
     }catch(err){
         console.error(err);
-        res.status(500).json({error:"Server error"});
+        res.status(500).json({error:"Server error"}); 
 }
 });
 
 app.post("/login", async (req,res)=>{
 
-    const {email,username, password}= req.body;
+    const {email,username, password,role}= req.body;
     const identifier = email || username;
 
     try{
         const userData = await pool.query(
-            "select * from users where email = $1 or username = $1",[identifier]
+            "select * from users where (email = $1 or username = $1) and role= $2",[identifier,role]
         );
+        
         //console.log(userData);
         if  (userData.rows.length ===0){
             return res.status(400).json({error: "User not found"});
         }
-
+        
         // comapre password
         const checkingVal =userData.rows[0].password;
 
@@ -74,6 +75,11 @@ app.post("/login", async (req,res)=>{
         if(!pwdmatch){
             return res.status(400).json({error:"Wrong Password"});
         } 
+
+        //update last seen
+        await pool.query(
+            "update users set last_seen = NOW() where id =$1",[userData.rows[0].id]
+        );
 
         const token = jwt.sign(
             {userId: userData.rows[0].id},
@@ -89,8 +95,30 @@ app.post("/login", async (req,res)=>{
     }
 });
 
+// function updateLastSeen(req, res, next) {
+//     const authHeader = req.headers.authorization;
+//     if (!authHeader) return next();
+
+//     const token = authHeader.split(" ")[1];
+
+//     try {
+//         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+//         pool.query(
+//             "UPDATE users SET last_seen = NOW() WHERE id = $1",
+//             [decoded.userId]
+//         );
+
+//     } catch (err) {
+//         console.log("Invalid token, skipping last_seen update");
+//     }
+
+//     next();
+// }
+
 const port = 5000;
 
 app.listen(port,()=>{
     console.log(`Server running on port http://localhost:${port} `);
 });
+ 
