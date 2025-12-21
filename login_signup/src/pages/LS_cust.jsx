@@ -37,7 +37,7 @@ function LS_cust(){
             //     return "All fields are required for Sign Up";
             // }
             if (!formData.name.trim())
-                return "Per ah podra";
+                return "Name is required";
             if (!formData.username.trim())
                 return "Username required";
             if (!formData.email.trim())

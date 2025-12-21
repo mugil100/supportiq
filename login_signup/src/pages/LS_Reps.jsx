@@ -13,25 +13,34 @@ import pwdicon from "../assets/password.png";
 
 const addr = "http://localhost:5000/";
 
-function LoginSignUp(){
+function LS_Reps(){
     const [action,setAction] = useState("Sign Up");
     const [showpwd, setshowPwd] = useState(false);
+    const [role, setRole] = useState("");
     const [formData, setFormData] = useState(
-        {username:"",
+        {name:"",
+        username:"",
         identifier:"",
         email:"",
-        password:""}
+        password:"",
+        role:""}
     );
-
+    console.log("Website is running");
     const handleChange = (e)=>{
         setFormData({...formData,[e.target.name]:e.target.value});
     }
 
+    //checks the correctness of inputs
+    //username format to be checked
     const validateForm=()=>{
         if(action==="Sign Up"){
             // if(!formData.username &&!formData.email &&!formData.password){
             //     return "All fields are required for Sign Up";
             // }
+            if (!role) 
+                return ("Please select Agent or Manager role");
+            if (!formData.name.trim())
+                return "Name is required";
             if (!formData.username.trim())
                 return "Username required";
             if (!formData.email.trim())
@@ -84,17 +93,18 @@ function LoginSignUp(){
                 const response = await axios.post(addr+"login",{
                     [field]: formData.identifier,
                     password: formData.password,
-                    role:"agent"
+                    role: role
                 });
 
                 alert("Login successful");
                 console.log(response.data);
             }else{
                 const response = await axios.post(addr+"signup",{
+                    name:formData.name,
                     username: formData.username,
                     email: formData.email,
                     password: formData.password,
-                    role:"agent"
+                    role:role
                 });
 
                 alert("Signup success");
@@ -104,15 +114,52 @@ function LoginSignUp(){
             alert(err.response?.data?.error); //wot???
         }
 
-        setFormData({username:"",identifier:"",email:"",password:""});
+        setFormData({name:"",username:"",identifier:"",email:"",password:""});
     };
 // user
     return(
         <div className="container">
+            {/* <div className="role">
+                <button
+                onClick={()=>{setRole("agent")
+                }}>
+                    Agent</button>
+                <button
+                onClick={()=>{setRole("manager")
+                }}>
+                    Manager</button>
+            </div> */}
+            <div className="role">
+                <button
+                    className={role === "agent" ? "active" : ""}
+                    onClick={() => setRole("agent")}
+                >
+                    Agent
+                </button>
+
+                <button
+                    className={role === "manager" ? "active" : ""}
+                    onClick={() => setRole("manager")}
+                >
+                    Manager
+                </button>
+            </div>
+
+            
             <TabSelect action={action} setAction={setAction} />
             <Header action={action}/>
 
             <div className={`inputs ${action === "Sign Up" ? "signup" : "login"}`}>
+                {action==="Sign Up" &&(
+                    <Input
+                    icon={usericon}
+                    type="text"
+                    placeholder="Name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    />
+                )}
                 {action==="Sign Up" &&(
                     <Input
                     icon={usericon}
@@ -169,7 +216,7 @@ function LoginSignUp(){
     );
 }
 
-export default LoginSignUp;
+export default LS_Reps;
 
 
 

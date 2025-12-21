@@ -209,3 +209,39 @@ body {
   font-size: 24px;
   user-select: none;
 }
+/* Role selector */
+.role {
+  display: flex;
+  gap: 12px;
+  margin: 25px 0;
+  background: #f0f4ff;
+  padding: 6px;
+  border-radius: 14px;
+}
+
+/* Role buttons */
+.role button {
+  flex: 1;
+  padding: 12px 0;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  font-size: 17px;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.role button:hover {
+  color: #6a11cb;
+}
+
+/* Active role */
+.role button.active {
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  color: #fff;
+  box-shadow: 0 6px 15px rgba(106, 17, 203, 0.35);
+  transform: translateY(-1px);
+}
