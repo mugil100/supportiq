@@ -1,0 +1,32 @@
+.ticket-navbar {
+    position: fixed;
+    background: #1f1f2e;
+    padding: 15px 40px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.ticket-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-item {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+    background: #ff9500;
+    color: white;
+}
+
+/* active tab highlight */
+.nav-item.active {
+    background: #ff9500;
+    color: white;
+}

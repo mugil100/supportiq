@@ -97,7 +97,8 @@ function LS_cust(){
 
                 alert("Login successful");
                 //console.log(response.data);
-                navigate("/chome",{state:{name: formData.name}});
+                navigate("/chome",{state:{name: response.data.name}});
+                console.log(response.data.name);
             }else{
                 const response = await axios.post(addr+"signup",{
                     name:formData.name,
@@ -108,8 +109,8 @@ function LS_cust(){
                 });
 
                 alert("Signup success");
-                //console.log(response.data);
-                navigate("/chome",{state:{name: formData.name}});
+                console.log(response.data.name);
+                navigate("/chome",{state:{name: response.data.name}});
             }
         }catch(err){
             alert(err.response?.data?.error); //wot???

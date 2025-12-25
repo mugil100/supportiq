@@ -5,20 +5,15 @@ import { Route, useNavigate, useLocation } from "react-router-dom";
 
 
 function Custhome(){
-    const loc = useLocation();
-    const name = loc.state?.name;
+    const location = useLocation();
+    const name = location.state?.name;
+    console.log(name);
     const navigate = useNavigate();
     // const [name, setName] = useState("");
     return (
         <div className="body">
             <TicketNavbar/>
             <div className="container">
-                {/* <Routes>
-                    <Route path="/home" element={<Home/>}/>
-                    <Route to="/raisetickets" element={<Raiseticket/>}/>
-                    <Route to="/mytickets" element={<Mytickets/>}/>
-                    <Route to="/help" element={<Help/>}/>
-                </Routes> */}
                 <div className="greeting">
                     <div className="welcome">
                         <h1>Welcome {name}</h1>

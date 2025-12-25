@@ -43,7 +43,7 @@ app.post("/signup", async(req,res)=>{
         "insert into users (username,email,password,role,name) values ($1,$2,$3,$4,$5)",[username, email, hashPwd,role,name]
     );
 
-    res.json({message: "User registered successfully !!!"});
+    res.json({message: "User registered successfully !!!",name: name});
 
     }catch(err){
         console.error(err);
@@ -88,7 +88,8 @@ app.post("/login", async (req,res)=>{
         );
         return res.json({message: "Login Successful",
             token,
-            username:userData.rows[0].username});
+            username:userData.rows[0].username,
+            name: userData.rows[0].name});
     }catch(err){
         console.error(err);
         res.status(500).json({error:"Server error"});

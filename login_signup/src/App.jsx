@@ -12,7 +12,7 @@ function App(){
         <Routes>
             <Route path="/" element={<LS_cust/>}/>
             <Route path="/agent" element={<LS_Reps/>}/>
-            <Route path="/tickets" element={<Mytickets/>}/>
+            <Route path="/mytickets" element={<Mytickets/>}/>
             <Route path="/chome" element={<Custhome/>}/>
         </Routes> 
 );
