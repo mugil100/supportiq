@@ -1,0 +1,52 @@
+.customer-home {
+  padding: 40px;
+  font-family: Arial, sans-serif;
+}
+
+.welcome h1 {
+  margin-bottom: 5px;
+}
+
+.welcome p {
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.actions {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.card {
+  flex: 1;
+  padding: 25px;
+  border-radius: 10px;
+  background: #f4f6f8;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  background: #e8ebee;
+  transform: translateY(-4px);
+}
+
+.recent h3 {
+  margin-bottom: 15px;
+}
+
+.ticket {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.status.open {
+  color: orange;
+}
+
+.status.resolved {
+  color: green;
+}

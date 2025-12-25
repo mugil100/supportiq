@@ -1,19 +1,21 @@
 import React,{useState} from "react";
 import "../styles/LoginSignUp.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import Header from "../components/Header";
 import Input from "../components/Input"; 
 import Submit from "../components/Submit";
 import TabSelect from "../components/TabSelect";
-
 import usericon from "../assets/person.png";
 import emailicon from "../assets/email.png";
 import pwdicon from "../assets/password.png";
+import Footer from "../components/Footer";
 
 const addr = "http://localhost:5000/";
 
 function LS_cust(){
+    const navigate= useNavigate();
     const [action,setAction] = useState("Sign Up");
     const [showpwd, setshowPwd] = useState(false);
     const [formData, setFormData] = useState(
@@ -94,7 +96,8 @@ function LS_cust(){
                 });
 
                 alert("Login successful");
-                console.log(response.data);
+                //console.log(response.data);
+                navigate("/chome",{state:{name: formData.name}});
             }else{
                 const response = await axios.post(addr+"signup",{
                     name:formData.name,
@@ -105,7 +108,8 @@ function LS_cust(){
                 });
 
                 alert("Signup success");
-                console.log(response.data);
+                //console.log(response.data);
+                navigate("/chome",{state:{name: formData.name}});
             }
         }catch(err){
             alert(err.response?.data?.error); //wot???
@@ -183,6 +187,7 @@ function LS_cust(){
             </div>
             <Submit action={action} handleSubmit={handleSubmit} />
         </div>
+        
     );
 }
 

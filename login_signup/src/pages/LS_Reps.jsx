@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import "../styles/LoginSignUp.css";
 import axios from "axios";
+import {BrowserRouter, Routes,Route} from "react-router-dom";
 
 import Header from "../components/Header";
 import Input from "../components/Input"; 
@@ -118,17 +119,10 @@ function LS_Reps(){
     };
 // user
     return(
-        <div className="container">
-            {/* <div className="role">
-                <button
-                onClick={()=>{setRole("agent")
-                }}>
-                    Agent</button>
-                <button
-                onClick={()=>{setRole("manager")
-                }}>
-                    Manager</button>
-            </div> */}
+        <div className="container1">
+            {/* <Routes>
+                <Route path="/tickets" element={<Mytickets/>}/>
+            </Routes> */}
             <div className="role">
                 <button
                     className={role === "agent" ? "active" : ""}
@@ -145,7 +139,6 @@ function LS_Reps(){
                 </button>
             </div>
 
-            
             <TabSelect action={action} setAction={setAction} />
             <Header action={action}/>
 
