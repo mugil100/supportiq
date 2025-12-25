@@ -1,58 +1,86 @@
-/* *{
-  font-family: "Knewave", system-ui;
-  font-weight: 400;
-  font-style: normal;
-} */
-
-.customer-home {
-  padding: 40px;
-  font-family: Arial, sans-serif;
+.welcome{
+  background: #26CCC2;
+  padding: 10%;
+  text-align: center;
 }
 
+.root{
+  width: 100%;
+  height: 100vh;
+}
+
+.cust-body {
+    height: 100vh;
+    width: 100vw;
+    background: #26CCC2;
+    font-family: "Segoe UI", sans-serif;
+    color: #083c3a;
+}
+
+.container {
+    background: #26CCC2;
+    width: 100%;
+    height:fit-content;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 30px;
+}
+
+/* Welcome text */
 .welcome h1 {
-  margin-bottom: 5px;
+    font-size: 32px;
+    font-weight: 600;
+    color: #FFF57E;
 }
 
-.welcome p {
-  color: #555;
-  margin-bottom: 30px;
+.welcome h2 {
+    margin-top: 6px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #FFF57E;
 }
 
+/* Card section */
 .actions {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 40px;
+    background: #26CCC2;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
 }
 
+/* Cards */
 .card {
-  flex: 1;
-  padding: 25px;
-  border-radius: 10px;
-  background: #f4f6f8;
-  cursor: pointer;
-  transition: 0.3s;
+    background: #FFF57E;
+    text-align: center;
+    width: 500px;
+    height: 300px;
+    border-radius: 10px;
+    border: 3px solid #FFB76C;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #083c3a;
+    padding: 5px;
+}
+
+.card p {
+    padding: 5px;
+    font-size: 14px;
+    color: #083c3a;
 }
 
 .card:hover {
-  background: #e8ebee;
-  transform: translateY(-4px);
-}
-
-.recent h3 {
-  margin-bottom: 15px;
-}
-
-.ticket {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px;
-  border-bottom: 1px solid #ddd;
-}
-
-.status.open {
-  color: orange;
-}
-
-.status.resolved {
-  color: green;
+    background: #FFB76C;
+    border-color: #FFF57E;
+    box-shadow: 0 12px 30px rgba(255, 183, 108, 0.6);
+    transform: translateY(-6px);
 }

@@ -14,6 +14,7 @@ function App(){
             <Route path="/agent" element={<LS_Reps/>}/>
             <Route path="/mytickets" element={<Mytickets/>}/>
             <Route path="/chome" element={<Custhome/>}/>
+            <Route path="/raiseticket" element={<Raiseticket/>}/>
         </Routes> 
 );
 }
