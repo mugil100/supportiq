@@ -16,6 +16,25 @@ app.get("/",(req,res)=>{
     res.send("SupportIQ backend running...");
 });
 
+const verifyToken = (req,res,next)=>{
+    console.log("Auth header:", req.headers.authorization);
+
+    const authHeader = req.headers.authorization;
+
+    if(!authHeader)return res.status(401).json({error: "No token"});
+
+    const token = authHeader.split(" ")[1];
+
+    jwt.verify(token, process.env.JWT_SECRET,(err,decoded)=>{
+         console.log("Decoded JWT:", decoded);
+        if(err) return res.status(403).json({error: "Invalid Token"});
+
+        req.customer_id = decoded.customer_id;
+        req.role = decoded.role;
+        next();
+    });
+};
+
 //user registration
 
 app.post("/signup", async(req,res)=>{
@@ -60,6 +79,7 @@ app.post("/signup", async(req,res)=>{
 }
 });
 
+
 app.post("/login", async (req,res)=>{
 
     const {email,username, password,role}= req.body;
@@ -91,7 +111,9 @@ app.post("/login", async (req,res)=>{
         );
 
         const token = jwt.sign(
-            {userId: userData.rows[0].id},
+            {customer_id: userData.rows[0].id,
+                role: userData.rows[0].role
+            },
             process.env.JWT_SECRET,
             {expiresIn:"1h"}
         );
@@ -105,26 +127,35 @@ app.post("/login", async (req,res)=>{
     }
 });
 
-// function updateLastSeen(req, res, next) {
-//     const authHeader = req.headers.authorization;
-//     if (!authHeader) return next();
+// setup multer for image upload
+const multer = require("multer");
+const storage = multer.diskStorage({
+    destination: (req,file,cb)=>cb(null,"uploads/"),
+    filename: (req,file,cb)=>cb(null,Date.now()+"-"+file.originalname)
+});
+const upload = multer({storage});
 
-//     const token = authHeader.split(" ")[1];
+app.post("/raiseticket", verifyToken,upload.single("image"), async(req,res)=>{
+    const {title,category,priority,description} = req.body;
+    const image = req.file?.filename ||null;
+    const customer_id = req.customer_id;
+    console.log("File received:", req.file);
+    console.log("Headers:", req.headers.authorization);
 
-//     try {
-//         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    try{
+        await pool.query(
+        `insert into tickets
+        (customer_id,title,category,priority,description,image_url)
+        values ($1,$2,$3,$4,$5,$6)`,
+        [customer_id,title,category,priority,description,image]);
+        // creation of new resource ~code 
+        res.status(201).json({message : "Ticket raised successfully"});
 
-//         pool.query(
-//             "UPDATE users SET last_seen = NOW() WHERE id = $1",
-//             [decoded.userId]
-//         );
-
-//     } catch (err) {
-//         console.log("Invalid token, skipping last_seen update");
-//     }
-
-//     next();
-// }
+    }catch(err){
+        console.error(err);
+        res.status(500).json({error: "Database error"});
+    }
+});
 
 const port = 5000;
 

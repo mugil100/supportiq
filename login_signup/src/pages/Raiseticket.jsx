@@ -2,8 +2,11 @@ import React,{useState} from "react";
 import "../styles/Raiseticket.css";
 import TicketNavbar from "../components/TicketNavbar";
 import Footer from "../components/Footer";
+import axios from "axios";
 
 function Raiseticket(){
+    const token = localStorage.getItem("token");
+    console.log(token);
     const addr = "http://localhost:5000/";
     const [ticket, setTicket] = useState({
         title:"", 
@@ -13,24 +16,36 @@ function Raiseticket(){
         image:null
     });
 
-    function handleChange(e){
+    const handleChange = (e)=>{
         setTicket({...ticket, [e.target.name]: e.target.value});
     }
-    function handleImg(e){
-        setTicket({...ticket, [e.target.name]: e.target.files[0]});
+    const handleImg = (e)=>{
+        setTicket({...ticket, image: e.target.files[0]});
     }
 
     const handleSubmit = async(e)=>{
         //avoid reset on browser behavior
+        console.log("JWT sent:", token);
         e.preventDefault();
-        // object data model for sending files
         const formdata = new FormData();
-        Object.keys(ticket).forEach(key=>{
-            formdata.append(key, ticket[key]);
-        });
+        // object data model for sending files
+        formdata.append("title", ticket.title);
+        formdata.append("category", ticket.category);
+        formdata.append("priority", ticket.priority);
+        formdata.append("description", ticket.description);
+        if(ticket.image){
+            formdata.append("image",ticket.image);
+        }
+
         try{
             console.log(formdata);
-            await axios.post(addr+"raiseticket",formdata);
+            await axios.post(addr+"raiseticket",formdata,
+                {headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "multipart/form-data"
+                }}
+            );
+
             alert("Ticket raise successfully");
             setTicket({
             title:"", 
@@ -40,7 +55,7 @@ function Raiseticket(){
             image:null
         });
         }catch(err){
-            alert("Failed to raise ticket :",err.response,data);
+            alert("Failed to raise ticket : "+err.message);
         }
     };
 
@@ -94,7 +109,7 @@ function Raiseticket(){
                         required />
 
                         <label>Image addressing the issue (optional)</label>
-                        <input type="file" onChange={handleImg}/>
+                        <input type="file" name="image" onChange={handleImg}/>
 
                         <button type="submit">Submit Ticket</button>
                     </form>

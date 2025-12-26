@@ -94,7 +94,7 @@ function LS_cust(){
                     password: formData.password,
                     role: "customer"
                 });
-
+                localStorage.setItem("token",response.data.token);
                 alert("Login successful");
                 // store token and set default Authorization header
                 if (response.data?.token) {
