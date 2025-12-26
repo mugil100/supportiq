@@ -96,7 +96,11 @@ function LS_cust(){
                 });
 
                 alert("Login successful");
-                //console.log(response.data);
+                // store token and set default Authorization header
+                if (response.data?.token) {
+                    localStorage.setItem("token", response.data.token);
+                    axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
+                }
                 navigate("/chome",{state:{name: response.data.name}});
                 console.log(response.data.name);
             }else{
@@ -109,6 +113,11 @@ function LS_cust(){
                 });
 
                 alert("Signup success");
+                // if server returned a token, store it
+                if (response.data?.token) {
+                    localStorage.setItem("token", response.data.token);
+                    axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
+                }
                 console.log(response.data.name);
                 navigate("/chome",{state:{name: response.data.name}});
             }

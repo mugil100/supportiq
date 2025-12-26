@@ -98,7 +98,13 @@ function LS_Reps(){
                 });
 
                 alert("Login successful");
-                console.log(response.data);
+                if (response.data?.token) {
+                    //save token in browser storage
+                    localStorage.setItem("token", response.data.token);
+                    axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
+                    console.log(axios.defaults.headers.common["Authorization"]);
+                }
+                
             }else{
                 const response = await axios.post(addr+"signup",{
                     name:formData.name,
@@ -109,7 +115,12 @@ function LS_Reps(){
                 });
 
                 alert("Signup success");
-                console.log(response.data);
+                if (response.data?.token) {
+                    localStorage.setItem("token", response.data.token);
+                    axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
+                    console.log(response.data);
+                }
+                
             }
         }catch(err){
             alert(err.response?.data?.error); //wot???

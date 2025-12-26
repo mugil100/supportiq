@@ -4,6 +4,8 @@ import LS_cust from './pages/LS_cust';
 import LS_Reps from './pages/LS_Reps';
 import Mytickets from "./pages/Mytickets";
 import Custhome from "./pages/Custhome";
+import Raiseticket from "./pages/Raiseticket";
+
 
 import {Routes,Route} from "react-router-dom";
 
