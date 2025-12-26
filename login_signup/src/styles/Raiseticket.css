@@ -1,0 +1,56 @@
+.container{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.ticket-body {
+  width: 100%;
+  min-height: 100vh;
+  background: #0f172a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+  color: white;
+}
+
+.raise-form {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(15px);
+  padding: 30px;
+  width: 420px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.raise-form input,
+.raise-form select,
+.raise-form textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: #1e293b;
+  color: white;
+}
+
+.raise-form textarea {
+  resize: none;
+  height: 120px;
+}
+
+.raise-form button {
+  background: linear-gradient(135deg,#6366f1,#8b5cf6);
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.raise-form button:hover {
+  transform: scale(1.03);
+}

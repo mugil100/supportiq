@@ -21,14 +21,14 @@ function Custhome(){
 
                     <div className="actions">
                         <div className="card"
-                            onClick={() => navigate("/customer/raisetickets")}
+                            onClick={() => navigate("/raiseticket")}
                         >
                             <h2>Raise a ticket</h2>
                             <p>Report an issue / request help</p>
                         </div>
 
                         <div className="card"
-                            onClick={() => navigate("/customer/mytickets")}
+                            onClick={() => navigate("/mytickets")}
                         >
                             <h2>View my tickets</h2>
                             <p>View and track your existing tickets</p>
