@@ -94,15 +94,14 @@ function LS_cust(){
                     password: formData.password,
                     role: "customer"
                 });
-                localStorage.setItem("token",response.data.token);
-                alert("Login successful");
                 // store token and set default Authorization header
                 if (response.data?.token) {
-                    localStorage.setItem("token", response.data.token);
+                    localStorage.setItem("token",response.data.token);
                     axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
                 }
+                alert("Login successful");
                 navigate("/chome",{state:{name: response.data.name}});
-                console.log(response.data.name);
+                console.log("Login done: "+response.data.name);
             }else{
                 const response = await axios.post(addr+"signup",{
                     name:formData.name,
@@ -111,13 +110,12 @@ function LS_cust(){
                     password: formData.password,
                     role:"customer"
                 });
-
-                alert("Signup success");
                 // if server returned a token, store it
                 if (response.data?.token) {
                     localStorage.setItem("token", response.data.token);
                     axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
                 }
+                alert("Signup success");
                 console.log(response.data.name);
                 navigate("/chome",{state:{name: response.data.name}});
             }
@@ -129,7 +127,8 @@ function LS_cust(){
     };
 // user
     return(
-        <div className="container">
+        <div className="cust-login">
+            <div className="container">
             <TabSelect action={action} setAction={setAction} />
             <Header action={action}/>
 
@@ -196,6 +195,7 @@ function LS_cust(){
                 Forgot password  <span>Click Here</span>
             </div>
             <Submit action={action} handleSubmit={handleSubmit} />
+            </div>
         </div>
         
     );

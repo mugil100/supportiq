@@ -22,7 +22,7 @@ function Raiseticket(){
     const handleImg = (e)=>{
         setTicket({...ticket, image: e.target.files[0]});
     }
-
+ 
     const handleSubmit = async(e)=>{
         //avoid reset on browser behavior
         console.log("JWT sent:", token);
@@ -61,7 +61,7 @@ function Raiseticket(){
     };
 
     return (
-        <div className="container">
+        <div className="ticket-container">
             <TicketNavbar/>
             <div className="ticket-body">
                 <h1>Raise a Support Ticket</h1>

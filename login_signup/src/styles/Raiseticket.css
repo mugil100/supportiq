@@ -1,56 +1,97 @@
-.container{
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.ticket-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #6AECE1;
+    /* allow scrolling if content overflows */
+    overflow-y: auto;
+}
+
 .ticket-body {
-  width: 100%;
-  min-height: 100vh;
-  background: #0f172a;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 50px;
-  color: white;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    background: #26CCC2;
+}
+
+
+.ticket-body h1 {
+    color: #FFF57E;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
 .raise-form {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(15px);
-  padding: 30px;
-  width: 420px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    backdrop-filter: blur(5px);
 }
 
-.raise-form input,
+.raise-form input[type="text"],
 .raise-form select,
-.raise-form textarea {
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  outline: none;
-  background: #1e293b;
-  color: white;
+.raise-form textarea,
+.raise-form input[type="file"] {
+    margin-bottom: 20px;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    background: #FFF57E;
+    color: #000;
+    transition: all 0.3s ease;
+}
+
+.raise-form input[type="text"]:focus,
+.raise-form select:focus,
+.raise-form textarea:focus {
+    box-shadow: 0 0 10px #FFB76C;
 }
 
 .raise-form textarea {
-  resize: none;
-  height: 120px;
+    resize: vertical;
+    min-height: 120px;
 }
 
 .raise-form button {
-  background: linear-gradient(135deg,#6366f1,#8b5cf6);
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #FFB76C;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .raise-form button:hover {
-  transform: scale(1.03);
+    background: #FFF57E;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Footer Styling */
+footer {
+    background: #26CCC2;
+    padding: 20px;
+    text-align: center;
+    color: #FFF57E;
+    font-weight: bold;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
 }

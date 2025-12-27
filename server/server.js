@@ -38,7 +38,7 @@ const verifyToken = (req,res,next)=>{
 //user registration
 
 app.post("/signup", async(req,res)=>{
-    console.log(req.body);
+
     const {name,username, email,password,role}=req.body;
 
     try{
@@ -59,26 +59,26 @@ app.post("/signup", async(req,res)=>{
     const hashPwd = await bcrypt.hash(password,10);
 
     const insertRes = await pool.query(
-        "insert into users (username,email,password,role,name) values ($1,$2,$3,$4,$5) RETURNING id, username, name",
+        "insert into users (username,email,password,role,name) values ($1,$2,$3,$4,$5) RETURNING id, username, name,role",
         [username, email, hashPwd, role, name]
     );
 
     const newUser = insertRes.rows[0];
     // issue token for the newly registered user
     const token = jwt.sign(
-        { userId: newUser.id },
+        { customer_id: newUser.id, role: newUser.role },
         process.env.JWT_SECRET,
         { expiresIn: "1h" }
     );
 
     res.json({ message: "User registered successfully !!!", name: newUser.name, username: newUser.username, token });
-
+    res.status(201).json({token});
+    
     }catch(err){
         console.error(err);
         res.status(500).json({error:"Server error"}); 
 }
 });
-
 
 app.post("/login", async (req,res)=>{
 

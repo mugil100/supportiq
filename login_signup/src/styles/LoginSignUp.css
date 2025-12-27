@@ -6,7 +6,7 @@
   font-family: 'Poppins', Arial, Helvetica, sans-serif;
 }
 
-body {
+.cust-login {
   height: 100vh;
   background: linear-gradient(135deg, #6a11cb, #2575fc);
   display: flex;
@@ -16,7 +16,7 @@ body {
 
 /* Container */
 .container {
-  width: 400px;
+  width: 400px; 
   background: #ffffff;
   border-radius: 16px;
   padding: 40px 30px;
@@ -27,7 +27,7 @@ body {
 }
 .container1 {
   width: 400px;
-  background: #ee1ea9;
+  background: #ebadd6;
   border-radius: 16px;
   padding: 40px 30px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
