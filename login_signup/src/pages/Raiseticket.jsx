@@ -35,6 +35,7 @@ function Raiseticket(){
         formdata.append("description", ticket.description);
         if(ticket.image){
             formdata.append("image",ticket.image);
+            
         }
 
         try{

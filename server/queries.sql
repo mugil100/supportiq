@@ -52,5 +52,5 @@ CREATE TABLE ticket_messages (
 );
 
 
-
+select * from tickets;
 
