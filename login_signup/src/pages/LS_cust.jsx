@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import "../styles/LoginSignUp.css";
-import axios from "axios";
+import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
 import Header from "../components/Header";
@@ -109,7 +109,7 @@ function LS_cust(){
                     email: formData.email,
                     password: formData.password,
                     role:"customer"
-                });
+                }); 
                 // if server returned a token, store it
                 if (response.data?.token) {
                     localStorage.setItem("token", response.data.token);

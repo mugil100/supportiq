@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import "../styles/Raiseticket.css";
 import TicketNavbar from "../components/TicketNavbar";
 import Footer from "../components/Footer";
-import axios from "axios";
+import axios from "../api/axios";
 
 function Raiseticket(){
     const token = localStorage.getItem("token");
@@ -59,7 +59,7 @@ function Raiseticket(){
             alert("Failed to raise ticket : "+err.message);
         }
     };
-
+ 
     return (
         <div className="ticket-container">
             <TicketNavbar/>

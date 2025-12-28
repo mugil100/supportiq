@@ -1,0 +1,24 @@
+.tickets-page{
+  padding:40px;
+  color:white;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:#0f172a;
+}
+
+th,td{
+  padding:12px;
+  border-bottom:1px solid #1e293b;
+}
+
+tr:hover{
+  background:#1e293b;
+  cursor:pointer;
+}
+
+.High{color:#ef4444;}
+.Medium{color:#facc15;}
+.Low{color:#22c55e;}

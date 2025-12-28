@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import "../styles/LoginSignUp.css";
-import axios from "axios";
+import axios from "../api/axios";
+
 import {BrowserRouter, Routes,Route} from "react-router-dom";
 
 import Header from "../components/Header";
@@ -13,7 +14,7 @@ import emailicon from "../assets/email.png";
 import pwdicon from "../assets/password.png";
 
 const addr = "http://localhost:5000/";
-
+ 
 function LS_Reps(){
     const [action,setAction] = useState("Sign Up");
     const [showpwd, setshowPwd] = useState(false);
