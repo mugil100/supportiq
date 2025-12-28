@@ -10,7 +10,7 @@ function Footer(){
                     <h3>SupportIQ</h3>
                     <p>Building clean & modern web experiences.</p>
                 </div>
-
+ 
                 <div className="footer-social">
                     <h4>Connect</h4>
                     <ul>
