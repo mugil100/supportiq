@@ -47,4 +47,23 @@ router.get("/mytickets", verifyToken, async (req, res) => {
     }
 });
 
+// get single ticket details
+router.get("/ticket/:id", verifyToken, async(req,res)=>{
+    const {id} = req.params;
+    const customer_id = req.customer_id;
+
+    const ticket = await pool.query(
+        `select * from tickets 
+        where ticket_id = $1 and customer_id=$2`,
+        [id, customer_id]
+    );
+
+    if (tickets.rows[0].length===0){
+        return res.status(404).json({error:"Ticket not found"});
+    }
+    res.json(ticket.rows[0]);
+});
+
+//fetch chat history
+
 module.exports = router;
