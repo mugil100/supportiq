@@ -65,5 +65,16 @@ router.get("/ticket/:id", verifyToken, async(req,res)=>{
 });
 
 //fetch chat history
+router.get("/ticket/:id/message", verifyToken, async(req,res)=>{
+    const {id} = req.params;
+    const {message} = req.body;
+
+    await pool.query(
+        `insert into ticket_messages (ticket_id, sender_type,sender_id,message)
+        values ($1,'Customer',$2,$3)
+        `, [id, req.customer_id,meaasge]
+    );
+    res.status(201).json({message: "Sent"});
+});
 
 module.exports = router;
