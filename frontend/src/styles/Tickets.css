@@ -36,16 +36,16 @@ tr:hover{
 
 /* Priority labels */
 .High{
-  color: #8CA9FF;
+  color: #e62020;
   font-weight: 600;
 }
 
 .Medium{
-  color: #AAC4F5;
+  color: #f0f012;
   font-weight: 600;
 }
 
 .Low{
-  color: #2b2b2b;
+  color: #78f534;
   font-weight: 600;
 }
