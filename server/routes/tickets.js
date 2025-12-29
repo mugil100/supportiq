@@ -65,6 +65,19 @@ router.get("/ticket/:id", verifyToken, async(req,res)=>{
 });
 
 //fetch chat history
+router.get("/ticket/:id/messages",verifyToken, async(req,res)=>{
+    const {id} = req.params;
+    const msgs = await pool.query(
+        `select sender_type, message, created_at
+        from ticket_messages
+        where ticket_id =$1
+        order by created_at ASC`,[id]
+    );
+    res.json(msgs.rows);
+});
+
+
+// send new message
 router.get("/ticket/:id/message", verifyToken, async(req,res)=>{
     const {id} = req.params;
     const {message} = req.body;
@@ -72,9 +85,23 @@ router.get("/ticket/:id/message", verifyToken, async(req,res)=>{
     await pool.query(
         `insert into ticket_messages (ticket_id, sender_type,sender_id,message)
         values ($1,'Customer',$2,$3)
-        `, [id, req.customer_id,meaasge]
+        `, [id, req.customer_id,message]
     );
     res.status(201).json({message: "Sent"});
+});
+
+//update ticket status
+
+app.put("/ticket/:id/status", verifyToken, async(req,res)=>{
+    const {id} = req.params;
+    const {status} = req.body;
+
+    await pool.query(
+        `update tickets set status =$1
+        where ticket_id = $2 and customer_id = $3`,
+        [status,id,req.customer_id]
+    );
+    res.json({message : "Status Updated"});
 });
 
 module.exports = router;
