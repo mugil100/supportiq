@@ -9,6 +9,11 @@ import Footer from "../components/Footer";
 
 
 function ViewTicket(){
+
+    const deleteMsg = async(id)=>{
+        await axios.delete(`ticket/message/${id}`);
+        setMessages(messages.filter(m=>m.message_id !== id));
+    };
     const {id} = useParams();
     const [ticket, setTicket] = useState({});
     const [messages, setMessages] = useState([]);
@@ -32,9 +37,12 @@ function ViewTicket(){
                 <h1 className="t-title">{ticket.title}</h1>
                 <span>Status: {ticket.status} </span>
                 <div className="chatbox">
-                {messages.map((m,i)=>(
-                    <div key={i} className={m.sender_type}>
+                {messages.map((m)=>(
+                    <div key={m.message_id} className={m.sender_type}>
                         {m.message}
+                        {m.sender_type === "Customer"&&(
+                            <button onClick={()=> deleteMsg(m.message_id)}>❌</button>
+                        )}
                     </div>
                 ))}
                 </div>

@@ -68,7 +68,7 @@ router.get("/ticket/:id", verifyToken, async(req,res)=>{
 router.get("/ticket/:id/messages",verifyToken, async(req,res)=>{
     const {id} = req.params;
     const msgs = await pool.query(
-        `select sender_type, message, created_at
+        `select sender_type, message, created_at,message_id
         from ticket_messages
         where ticket_id =$1 and is_deleted=false
         order by created_at ASC`,[id]
@@ -111,7 +111,7 @@ router.delete("/ticket/message/:id/", verifyToken, async(req,res)=>{
 
     await pool.query(
         `update ticket_messages
-        set is_deleted=true
+        set is_deleted = true
         where message_id=$1 and sender_id=$2`,
         [id, req.customer_id]
     );
