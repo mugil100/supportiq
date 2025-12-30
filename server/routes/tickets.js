@@ -4,7 +4,7 @@ const { verifyToken } = require("../middleware/auth");
 const upload = require("../middleware/upload");
 
 const router = express.Router();
-
+ 
 // Raise a ticket
 router.post("/raiseticket", verifyToken, upload.single("image"), async (req, res) => {
     const { title, category, priority, description } = req.body;
@@ -58,7 +58,7 @@ router.get("/ticket/:id", verifyToken, async(req,res)=>{
         [id, customer_id]
     );
 
-    if (tickets.rows[0].length===0){
+    if (ticket.rows[0].length===0){
         return res.status(404).json({error:"Ticket not found"});
     }
     res.json(ticket.rows[0]);
@@ -70,7 +70,7 @@ router.get("/ticket/:id/messages",verifyToken, async(req,res)=>{
     const msgs = await pool.query(
         `select sender_type, message, created_at
         from ticket_messages
-        where ticket_id =$1
+        where ticket_id =$1 and is_deleted=false
         order by created_at ASC`,[id]
     );
     res.json(msgs.rows);
@@ -78,7 +78,7 @@ router.get("/ticket/:id/messages",verifyToken, async(req,res)=>{
 
 
 // send new message
-router.get("/ticket/:id/message", verifyToken, async(req,res)=>{
+router.post("/ticket/:id/message", verifyToken, async(req,res)=>{
     const {id} = req.params;
     const {message} = req.body;
 
@@ -87,12 +87,12 @@ router.get("/ticket/:id/message", verifyToken, async(req,res)=>{
         values ($1,'Customer',$2,$3)
         `, [id, req.customer_id,message]
     );
-    res.status(201).json({message: "Sent"});
+    res.status(201).json({message: "Message Sent"});
 });
 
 //update ticket status
 
-app.put("/ticket/:id/status", verifyToken, async(req,res)=>{
+router.put("/ticket/:id/status", verifyToken, async(req,res)=>{
     const {id} = req.params;
     const {status} = req.body;
 
@@ -102,6 +102,20 @@ app.put("/ticket/:id/status", verifyToken, async(req,res)=>{
         [status,id,req.customer_id]
     );
     res.json({message : "Status Updated"});
+});
+
+// delete message
+
+router.delete("/ticket/message/:id/", verifyToken, async(req,res)=>{
+    const {id} = req.params;
+
+    await pool.query(
+        `update ticket_messages
+        set is_deleted=true
+        where message_id=$1 and sender_id=$2`,
+        [id, req.customer_id]
+    );
+    res.json({message: "Message deleted"});
 });
 
 module.exports = router;

@@ -5,8 +5,7 @@ import LS_Reps from './pages/LS_Reps';
 import Mytickets from "./pages/Mytickets";
 import Custhome from "./pages/Custhome";
 import Raiseticket from "./pages/Raiseticket";
-
-
+import ViewTicket from "./pages/ViewTicket";
 import {Routes,Route} from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute';
 
@@ -30,6 +29,11 @@ function App(){
                     <Raiseticket/>
                 </PrivateRoute>
                 }/>
+            <Route path="/ticket/:id" element={
+                <PrivateRoute>
+                    <ViewTicket/>
+                </PrivateRoute>
+            }/>
         </Routes> 
 );
 }

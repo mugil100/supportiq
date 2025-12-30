@@ -54,3 +54,4 @@ CREATE TABLE ticket_messages (
 
 select * from tickets;
 
+select * from ticket_messages;

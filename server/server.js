@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const authRoutes = require("./routes/auth");
 const ticketRoutes = require("./routes/tickets");
-
+ 
 const app = express();
 app.use(express.json());
 app.use(cors());

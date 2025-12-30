@@ -1,0 +1,52 @@
+import React from "react";
+import axios from "../api/axios";
+import { useParams } from "react-router-dom";
+import "../styles/ViewTicket.css";
+import { useState } from "react";
+import { useEffect } from "react";
+import TicketNavbar from "../components/TicketNavbar";
+import Footer from "../components/Footer";
+
+
+function ViewTicket(){
+    const {id} = useParams();
+    const [ticket, setTicket] = useState({});
+    const [messages, setMessages] = useState([]);
+    const [text, setText] = useState("");
+
+    useEffect(()=>{
+        axios.get(`ticket/${id}`).then(res=>setTicket(res.data));
+        axios.get(`ticket/${id}/messages`).then(res=>setMessages(res.data));
+    },[id]);
+
+    const sendMessage = async()=>{
+        await axios.post(`ticket/${id}/message`,{message:text});
+        setMessages([...messages,{sender_type:"Customer", message: text}]);
+        setText("");
+    }
+
+    return (
+        <div className="vt-body">
+            <TicketNavbar className="header"/>
+            <div className="ticket-view">
+                <h1 className="t-title">{ticket.title}</h1>
+                <span>Status: {ticket.status} </span>
+                <div className="chatbox">
+                {messages.map((m,i)=>(
+                    <div key={i} className={m.sender_type}>
+                        {m.message}
+                    </div>
+                ))}
+                </div>
+                <div className="chat-input">
+                <input type="text" value={text}
+                onChange={e=>setText(e.target.value)}/>
+                <button onClick={sendMessage}>Send</button>
+                </div>
+            </div>
+            <Footer className="footer"/>
+        </div>
+        
+    );
+}
+export default ViewTicket;
