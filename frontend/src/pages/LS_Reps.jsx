@@ -33,13 +33,8 @@ function LS_Reps(){
         setFormData({...formData,[e.target.name]:e.target.value});
     }
 
-    //checks the correctness of inputs
-    //username format to be checked
     const validateForm=()=>{
         if(action==="Sign Up"){
-            // if(!formData.username &&!formData.email &&!formData.password){
-            //     return "All fields are required for Sign Up";
-            // }
             if (!role) 
                 return ("Please select Agent or Manager role");
             if (!formData.name.trim())
@@ -61,27 +56,8 @@ function LS_Reps(){
                 return "Enter Email or Username";
             if(!formData.password.trim())
                 return "Password is required";}
-        // }else{
-        //     if(!formData.username ||!formData.password){
-        //         return"Email and Password are required for Login"
-        //     }
-        // }
         return null;
     }
-    // const handleSubmit=()=>{
-    //     const error = validateForm();
-    //     if (error){
-    //         alert(error);
-    //         return;
-    //     }
-
-    //     if(action ==="Login"){
-    //         console.log("Logging in with:", formData);
-    //     }else{
-    //         console.log("Signing up in with:", formData);
-    //     }
-    //     setFormData({username:"", email:"",password:""});
-    // };
     const handleSubmit = async()=>{
         const error = validateForm();
         if (error){
@@ -110,7 +86,7 @@ function LS_Reps(){
                 }
                 alert("Login successful");
                 console.log(response.data.name);
-                navigate("/home",{state:{name: response.data.name}});
+                navigate("/agent/ahome",{state:{name: response.data.name}});
                 
                 
             }else{
@@ -131,7 +107,7 @@ function LS_Reps(){
                 }
                 alert("Signup success");
                 console.log(response.data.name);
-                navigate("/home",{state:{name: response.data.name}});      
+                navigate("/agent/ahome",{state:{name: response.data.name}});    
             }
         }catch(err){
             alert(err.response?.data?.error); //wot???

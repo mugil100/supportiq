@@ -4,7 +4,7 @@ const {verifyToken} = require("../middleware/auth");
 const router = express.Router();
 
 // get all tickets assigned to the agent
-router.get("/agent/home",verifyToken, async(req,res)=>{
+router.get("/agent/ahome",verifyToken, async(req,res)=>{
     if(req.role!== "agent")
         return res.status(403).json({error:"Access denied"});
 

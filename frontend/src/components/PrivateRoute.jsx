@@ -8,6 +8,8 @@ const PrivateRoute = ({children, role})=>{
     if(!token) return <Navigate to="/"/>;
 
     if(role && userRole !== role){
+        console.log(userRole);
+        console.log(role);
         return <Navigate to="/unauth"/>;
     }
     return children;

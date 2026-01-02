@@ -45,6 +45,8 @@ router.post("/signup", async (req, res) => {
             message: "User registered successfully !!!",
             name: newUser.name,
             username: newUser.username,
+            role: newUser.role,
+            id: newUser.id,
             token
         });
 
@@ -96,7 +98,9 @@ router.post("/login", async (req, res) => {
             message: "Login Successful",
             token,
             username: userData.rows[0].username,
-            name: userData.rows[0].name
+            name: userData.rows[0].name,
+            role: userData.rows[0].role,
+            id: userData.rows[0].id
         });
     } catch (err) {
         console.error(err);

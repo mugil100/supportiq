@@ -35,11 +35,16 @@ function App(){
                     <ViewTicket/>
                 </PrivateRoute>
             }/>
-            <Route path="/agent/home" element={
+            <Route path="/agent/ahome" element={
                 <PrivateRoute role='agent'>
                     <AgentHome/>
                 </PrivateRoute>
             }/>
+            {/* <Route path="/agent/mhome" element={
+                <PrivateRoute role='manager'>
+                    <ManagerHome/>
+                </PrivateRoute>
+            }/> */}
         </Routes> 
 );
 }

@@ -6,13 +6,14 @@ import Footer from "../components/Footer";
 function AgentHome(){
     const [stats, setStats] = useState({});
     useEffect(()=>{
-        axios.get("agent/stats"
-            .then(res=>setStats(res.data)))
-            ;},[]);
+        axios.get("agent/stats")
+            .then(res=>setStats(res.data))
+            .catch(err=> console.log(err));
+            },[]);
 
     return(
-        <>
-            <AgentNavbar/>
+        <> 
+            {/* <AgentNavbar/> */}
                 <div className="stats-row">
                     <div className="card">
                         Assigned <br/> <b>{stats.assigned}</b>
