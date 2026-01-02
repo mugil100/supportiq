@@ -1,0 +1,15 @@
+.stats-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  padding:30px;
+}
+
+.card{
+  background:#020617;
+  padding:25px;
+  border-radius:12px;
+  color:white;
+  text-align:center;
+  font-size:18px;
+}

@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import "../styles/LoginSignUp.css";
 import axios from "../api/axios";
-
+import { useNavigate } from "react-router-dom";
 import {BrowserRouter, Routes,Route} from "react-router-dom";
 
 import Header from "../components/Header";
@@ -16,6 +16,7 @@ import pwdicon from "../assets/password.png";
 const addr = "http://localhost:5000/";
  
 function LS_Reps(){
+    const navigate = useNavigate();
     const [action,setAction] = useState("Sign Up");
     const [showpwd, setshowPwd] = useState(false);
     const [role, setRole] = useState("");
@@ -98,13 +99,19 @@ function LS_Reps(){
                     role: role
                 });
 
-                alert("Login successful");
+                
                 if (response.data?.token) {
                     //save token in browser storage
                     localStorage.setItem("token", response.data.token);
+                    localStorage.setItem("role",response.data.role);
+                    localStorage.setItem("user_id",response.data.id);
                     axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
                     console.log(axios.defaults.headers.common["Authorization"]);
                 }
+                alert("Login successful");
+                console.log(response.data.name);
+                navigate("/home",{state:{name: response.data.name}});
+                
                 
             }else{
                 const response = await axios.post(addr+"signup",{
@@ -115,13 +122,16 @@ function LS_Reps(){
                     role:role
                 });
 
-                alert("Signup success");
                 if (response.data?.token) {
                     localStorage.setItem("token", response.data.token);
+                    localStorage.setItem("role",response.data.role);
+                    localStorage.setItem("user_id",response.data.id);
                     axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
                     console.log(response.data);
                 }
-                
+                alert("Signup success");
+                console.log(response.data.name);
+                navigate("/home",{state:{name: response.data.name}});      
             }
         }catch(err){
             alert(err.response?.data?.error); //wot???

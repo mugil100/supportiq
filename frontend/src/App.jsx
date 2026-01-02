@@ -8,6 +8,7 @@ import Raiseticket from "./pages/Raiseticket";
 import ViewTicket from "./pages/ViewTicket";
 import {Routes,Route} from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute';
+import AgentHome from './pages/AgentHome';
 
 function App(){
     return (
@@ -32,6 +33,11 @@ function App(){
             <Route path="/ticket/:id" element={
                 <PrivateRoute>
                     <ViewTicket/>
+                </PrivateRoute>
+            }/>
+            <Route path="/agent/home" element={
+                <PrivateRoute role='agent'>
+                    <AgentHome/>
                 </PrivateRoute>
             }/>
         </Routes> 
