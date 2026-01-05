@@ -99,9 +99,14 @@ function LS_cust(){
                     localStorage.setItem("token",response.data.token);
                     axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
                 }
+                // persist user's name so it survives navigation/refresh
+                if (response.data?.name) {
+                    localStorage.setItem("name", response.data.name);
+                }
                 alert("Login successful");
-                navigate("/chome",{state:{name: response.data.name}});
                 console.log("Login done: "+response.data.name);
+                navigate("/chome",{state:{name: response.data.name}});
+                
             }else{
                 const response = await axios.post(addr+"signup",{
                     name:formData.name,
@@ -114,6 +119,9 @@ function LS_cust(){
                 if (response.data?.token) {
                     localStorage.setItem("token", response.data.token);
                     axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.token}`;
+                }
+                if (response.data?.name) {
+                    localStorage.setItem("name", response.data.name);
                 }
                 alert("Signup success");
                 console.log(response.data.name);

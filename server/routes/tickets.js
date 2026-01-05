@@ -30,6 +30,7 @@ router.post("/raiseticket", verifyToken, upload.single("image"), async (req, res
 
 // Get user's tickets
 router.get("/mytickets", verifyToken, async (req, res) => {
+    
     const customer_id = req.customer_id;
 
     try {

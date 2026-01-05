@@ -25,7 +25,7 @@
   overflow: hidden;
   transition: all 0.4s ease;
 }
-.container1 {
+.al-container {
   width: 400px;
   background: #ebadd6;
   border-radius: 16px;
@@ -34,6 +34,8 @@
   position: relative;
   overflow: hidden;
   transition: all 0.4s ease;
+  margin: auto;
+  
 }
 
 /* Tabs */

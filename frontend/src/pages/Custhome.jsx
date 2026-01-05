@@ -7,12 +7,13 @@ import Footer from "../components/Footer";
 function Custhome(){
     const navigate = useNavigate();
     const location = useLocation();
-    const name = location.state?.name || "User";
+    const name = location.state?.name|| "User";
+    console.log(name);
 
     return (
         <div className="cust-body">
             <TicketNavbar/>
-            <div className="container">
+            <div className="cust-container">
                 <div className="greeting">
                     <div className="welcome">
                         <h1>Welcome, {name}</h1>

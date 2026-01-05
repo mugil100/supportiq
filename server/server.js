@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
     res.send("SupportIQ backend running...");
 });
 
-// Mount routes
+// Mount routes 
 app.use("/", authRoutes);
 app.use("/", ticketRoutes);
 

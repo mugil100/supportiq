@@ -1,15 +1,47 @@
+.ahome{
+  padding:30px;
+  margin-left: 240px;   /* same as sidebar width */
+}
+
 .stats-row{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:20px;
   padding:30px;
+  padding: 20px;
 }
 
-.card{
-  background:#020617;
+
+.a-card{
+  background:#1ad853;
   padding:25px;
   border-radius:12px;
   color:white;
   text-align:center;
-  font-size:18px;
+  font-size:1.2rem;
+  font-weight: bolder;
+  padding-top: 100px;
+  padding-bottom: 250px;
+}
+
+.a-num{
+  font-size: 1.6rem;
+  padding-top: 30%;
+}
+
+.a-nav-items{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.a-nav-items a{
+  margin-bottom: 50px;
+}
+
+.recent-activity{
+  text-align: center;
+  border: 2px black;
 }

@@ -2,8 +2,12 @@ import React,{ useEffect, useState} from "react";
 import axios from "../api/axios";
 // import AgentNavbar from "../components/AgentNavbar";
 import "../styles/AgentHome.css";
-import Footer from "../components/Footer";
+import AgentNavbar from "./AgentNavbar";
+import { useLocation } from "react-router-dom";
+
 function AgentHome(){
+    const location = useLocation();
+    const aname = location.state?.name || "Agent";
     const [stats, setStats] = useState({});
     useEffect(()=>{
         axios.get("agent/stats")
@@ -13,24 +17,37 @@ function AgentHome(){
 
     return(
         <> 
-            {/* <AgentNavbar/> */}
+            <AgentNavbar/>
+            <div className="ahome">
+                <h1>Welcome Back, {aname} </h1>
                 <div className="stats-row">
-                    <div className="card">
-                        Assigned <br/> <b>{stats.assigned}</b>
+                    <div className="a-card">
+                        Assigned <br/> <b className="a-num">{stats.assigned ?? 0}</b>
                     </div>
-                    <div className="card">
-                        In progress <br/> <b>{stats.inProgress}</b>
+                    <div className="a-card">
+                        In progress <br/> <b className="a-num">{stats.inProgress ??0}</b>
                     </div>
-                    <div className="card">
-                        Unreplied <br/> <b>{stats.unreplied}</b>
+                    <div className="a-card">
+                        Unreplied <br/> <b className="a-num">{stats.unreplied ?? 0}</b>
                     </div>
-                    <div className="card">
-                        Resolved <br/> <b>{stats.resolved}</b>
+                    <div className="a-card">
+                        Resolved <br/> <b className="a-num">{stats.resolved ?? 0}</b>
                     </div>
                 </div>
-            <Footer/>
+
+                <div className="recent-activity">
+                    <h1>Recent Activity</h1>
+                    <div className="r-items"> Recent 1</div>
+                    <div className="r-items"> Recent 2</div>
+                    <div className="r-items"> Recent 3</div>
+                    <div className="r-items"> Recent 4</div>
+                    <div className="r-items"> Recent 5</div>
+                    
+                </div>
+            </div>
         </>
     );
 }
 
 export default AgentHome;
+

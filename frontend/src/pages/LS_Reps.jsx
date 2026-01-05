@@ -29,6 +29,8 @@ function LS_Reps(){
         role:""}
     );
     console.log("Website is running");
+
+    // handle changing values in the form
     const handleChange = (e)=>{
         setFormData({...formData,[e.target.name]:e.target.value});
     }
@@ -37,7 +39,7 @@ function LS_Reps(){
         if(action==="Sign Up"){
             if (!role) 
                 return ("Please select Agent or Manager role");
-            if (!formData.name.trim())
+            if (!formData.name.trim())          //removes whitespace spaces, tabs, newlines
                 return "Name is required";
             if (!formData.username.trim())
                 return "Username required";
@@ -117,7 +119,7 @@ function LS_Reps(){
     };
 // user
     return(
-        <div className="container1">
+        <div className="al-container">
             {/* <Routes>
                 <Route path="/tickets" element={<Mytickets/>}/>
             </Routes> */}
