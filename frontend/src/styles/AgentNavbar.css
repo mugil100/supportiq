@@ -48,3 +48,13 @@
   flex-direction: column;
   justify-content: space-between;
 }
+.a-nav-items p{
+    cursor:pointer;
+    padding:10px;
+}
+
+.active-link{
+    background:#2575fc;
+    color:white;
+    border-radius:6px;
+}

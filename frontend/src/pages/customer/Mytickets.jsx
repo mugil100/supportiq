@@ -1,9 +1,9 @@
 import React,{useState, useEffect, use} from "react";
-import "../styles/Tickets.css";
-import axios from "../api/axios";
-import TicketNavbar from "../components/TicketNavbar";
+import "../../styles/Tickets.css";
+import axios from "../../api/axios";
+import TicketNavbar from "../../components/TicketNavbar";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
+import Footer from "../../components/Footer";
 
 function Mytickets(){
 

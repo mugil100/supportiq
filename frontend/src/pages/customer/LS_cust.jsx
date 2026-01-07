@@ -1,16 +1,17 @@
 import React,{useState} from "react";
-import "../styles/LoginSignUp.css";
-import axios from "../api/axios";
+import "../../styles/LoginSignUp.css";
+import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 
-import Header from "../components/Header";
-import Input from "../components/Input"; 
-import Submit from "../components/Submit";
-import TabSelect from "../components/TabSelect";
-import usericon from "../assets/person.png";
-import emailicon from "../assets/email.png";
-import pwdicon from "../assets/password.png";
-import Footer from "../components/Footer";
+import Header from "../../components/Header";
+import Input from "../../components/Input"; 
+import Submit from "../../components/Submit";
+import TabSelect from "../../components/TabSelect";
+
+import usericon from "../../assets/person.png";
+import emailicon from "../../assets/email.png";
+import pwdicon from "../../assets/password.png";
+import Footer from "../../components/Footer";
 
 const addr = "http://localhost:5000/";
 

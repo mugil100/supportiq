@@ -1,8 +1,8 @@
 import React,{useState} from "react";
-import "../styles/Raiseticket.css";
-import TicketNavbar from "../components/TicketNavbar";
-import Footer from "../components/Footer";
-import axios from "../api/axios";
+import "../../styles/Raiseticket.css";
+import TicketNavbar from "../../components/TicketNavbar";
+import Footer from "../../components/Footer";
+import axios from "../../api/axios";
 
 function Raiseticket(){
     const token = localStorage.getItem("token");

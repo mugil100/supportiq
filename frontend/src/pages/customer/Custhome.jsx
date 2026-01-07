@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import TicketNavbar from "../components/TicketNavbar";
-import "../styles/Custhome.css";
+import TicketNavbar from "../../components/TicketNavbar";
+import "../../styles/Custhome.css";
 import { Route, useNavigate, useLocation } from "react-router-dom";
-import Footer from "../components/Footer";
+import Footer from "../../components/Footer";
 
 function Custhome(){
     const navigate = useNavigate();

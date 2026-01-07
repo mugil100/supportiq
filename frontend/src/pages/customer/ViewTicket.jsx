@@ -1,11 +1,11 @@
 import React from "react";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 import { useParams } from "react-router-dom";
-import "../styles/ViewTicket.css";
+import "../../styles/ViewTicket.css";
 import { useState } from "react";
 import { useEffect } from "react";
-import TicketNavbar from "../components/TicketNavbar";
-import Footer from "../components/Footer";
+import TicketNavbar from "../../components/TicketNavbar";
+import Footer from "../../components/Footer";
 
 
 function ViewTicket(){

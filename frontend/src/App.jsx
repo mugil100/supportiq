@@ -1,14 +1,15 @@
 import React,{useState} from 'react';
 import "./styles/LoginSignUp.css";
-import LS_cust from './pages/LS_cust';
-import LS_Reps from './pages/LS_Reps';
-import Mytickets from "./pages/Mytickets";
-import Custhome from "./pages/Custhome";
-import Raiseticket from "./pages/Raiseticket";
-import ViewTicket from "./pages/ViewTicket";
+import LS_cust from './pages/customer/LS_cust';
+import LS_Reps from './pages/agent/LS_Reps';
+import Mytickets from "./pages/customer/Mytickets";
+import Custhome from "./pages/customer/Custhome";
+import Raiseticket from "./pages/customer/Raiseticket";
+import ViewTicket from "./pages/customer/ViewTicket";
 import {Routes,Route} from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute';
-import AgentHome from './pages/AgentHome';
+import AgentHome from './pages/agent/AgentHome';
+import AgentTickets from "./pages/agent/AgentTickets";
 
 function App(){
     return (
@@ -40,6 +41,13 @@ function App(){
                     <AgentHome/>
                 </PrivateRoute>
             }/>
+            <Route path='/agent/tickets/:status' element={
+                <PrivateRoute>
+                    <AgentTickets/>
+                </PrivateRoute>
+            }
+            />
+
             {/* <Route path="/agent/mhome" element={
                 <PrivateRoute role='manager'>
                     <ManagerHome/>
