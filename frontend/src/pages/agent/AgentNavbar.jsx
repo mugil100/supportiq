@@ -28,7 +28,7 @@ function AgentNavbar(){
 
                 <p className={isActive("/agent/agenttickets")}
                 onClick={()=>{navigate("/agent/agenttickets")}} >My Tickets</p>
-                
+               
                 <p className={isActive("/agent/unassigned")}
                 onClick={()=>{navigate("/agent/unassigned")}}>Unassigned</p>
                 

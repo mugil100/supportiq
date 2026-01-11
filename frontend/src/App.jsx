@@ -10,6 +10,11 @@ import {Routes,Route} from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute';
 import AgentHome from './pages/agent/AgentHome';
 import AgentTickets from "./pages/agent/AgentTickets";
+// import AgentUnassigned from "./pages/agent/AgentUnassigned";
+// import  AgentNotifications from "./pages/agent/AgentNotifications"
+// import AgentPerf from "./pages/agent/AgentPerf";
+// import Agenthelp from "./pages/agent/Agenthelp";
+
 
 function App(){
     return (
@@ -36,6 +41,7 @@ function App(){
                     <ViewTicket/>
                 </PrivateRoute>
             }/>
+            //agent pages starts here
             <Route path="/agent/ahome" element={
                 <PrivateRoute role='agent'>
                     <AgentHome/>
@@ -47,6 +53,9 @@ function App(){
                 </PrivateRoute>
             }
             />
+            <Route path='/agent/'>
+
+            </Route>
 
             {/* <Route path="/agent/mhome" element={
                 <PrivateRoute role='manager'>
